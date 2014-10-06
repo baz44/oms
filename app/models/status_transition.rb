@@ -6,6 +6,8 @@ class StatusTransition < ActiveRecord::Base
 
   after_save :update_order_status
 
+  validates_inclusion_of :to, in: %w{draft placed paid canceled}
+
   private
 
   def check_status_transition

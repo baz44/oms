@@ -3,13 +3,19 @@ class Order < ActiveRecord::Base
   has_many :status_transitions
   has_many :products, through: :line_items
 
-  validates_inclusion_of :status, in: %w{draft placed paid cancelled}
-
-  before_create :set_date
+  validates_inclusion_of :status, in: %w{draft placed paid canceled}
   validate :status_should_be_draft, on: :update
+
+  before_create :set_date, :set_status
+
+  private
 
   def set_date
     self.date = Time.now
+  end
+
+  def set_status
+    self.status = "draft"
   end
 
   def status_should_be_draft
