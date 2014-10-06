@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
   has_many :orders, through: :line_items
 
   validates_uniqueness_of :name
+  validates_presence_of :name, :net_price
 
   before_destroy :validate_orders
 

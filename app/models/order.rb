@@ -11,7 +11,7 @@ class Order < ActiveRecord::Base
   private
 
   def set_date
-    self.date = Time.now
+    self.order_date = Time.now
   end
 
   def set_status

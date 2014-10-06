@@ -4,7 +4,7 @@ RSpec.describe Order, :type => :model do
   describe ".create" do
     it "should allow me to create an order" do
       product = Product.create(name: "test", net_price: 22.33)
-      line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
+      line_item_1 = LineItem.create(product_id: product.id, quantity: 3, net_price: 22.33)
       order = Order.create(line_items: [line_item_1])
       expect(Order.find(order)).to eql(order)
     end
