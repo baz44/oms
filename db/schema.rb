@@ -18,20 +18,20 @@ ActiveRecord::Schema.define(version: 20141006141950) do
 
   create_table "line_items", force: true do |t|
     t.integer "quantity"
-    t.decimal "net_price",  precision: 5, scale: 2
+    t.float   "net_price"
     t.integer "order_id"
     t.integer "product_id"
   end
 
   create_table "orders", force: true do |t|
-    t.string  "status",                             default: "draft"
-    t.date    "order_date",                         default: '2014-10-06'
-    t.decimal "vat",        precision: 5, scale: 2, default: 20.0
+    t.string "status",     default: "draft"
+    t.date   "order_date", default: '2014-10-07'
+    t.float  "vat",        default: 20.0
   end
 
   create_table "products", force: true do |t|
-    t.string  "name"
-    t.decimal "net_price", precision: 5, scale: 2
+    t.string "name"
+    t.float  "net_price"
   end
 
   create_table "status_transitions", force: true do |t|

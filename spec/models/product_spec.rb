@@ -42,8 +42,8 @@ RSpec.describe Product, :type => :model do
 
     it "should not allow me to delete a product that exist in an order" do
       product = Product.create(name: "test", net_price: 22.33)
-      line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-      order = Order.create(line_items: [line_item_1])
+      order = Order.create
+      line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
       product.destroy
       expect(product.errors[:base]).to eql(["Cannot delete a product that has been added to orders."])
       expect(Product.find_by_name("test")).to eql(product)

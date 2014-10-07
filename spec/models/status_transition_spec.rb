@@ -4,8 +4,8 @@ RSpec.describe StatusTransition, :type => :model do
   describe ".create" do
     it "should allow me to create an status transition and changing the order status" do
       product = Product.create(name: "test", net_price: 22.33)
-      line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-      order = Order.create(line_items: [line_item_1])
+      order = Order.create
+      line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
       status_transition_created = StatusTransition.create(order: order,
                                                           event: "order placed",
                                                           to: "placed")
@@ -16,8 +16,8 @@ RSpec.describe StatusTransition, :type => :model do
     context "status transition is valid" do
       it "should change the status from draft to placed" do
         product = Product.create(name: "test", net_price: 22.33)
-        line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-        order = Order.create(line_items: [line_item_1])
+        order = Order.create
+        line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
         status_transition = StatusTransition.create(order: order,
                                                   event: "order placed",
                                                   to: "placed")
@@ -27,8 +27,8 @@ RSpec.describe StatusTransition, :type => :model do
 
       it "should change the status from placed to paid" do
         product = Product.create(name: "test", net_price: 22.33)
-        line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-        order = Order.create(line_items: [line_item_1])
+        order = Order.create
+        line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
         StatusTransition.create(order: order,
                                 event: "order placed",
                                 to: "placed")
@@ -42,8 +42,8 @@ RSpec.describe StatusTransition, :type => :model do
 
       it "should change the status from placed to canceled" do
         product = Product.create(name: "test", net_price: 22.33)
-        line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-        order = Order.create(line_items: [line_item_1])
+        order = Order.create
+        line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
         StatusTransition.create(order: order,
                                 event: "order placed",
                                 to: "placed")
@@ -57,8 +57,8 @@ RSpec.describe StatusTransition, :type => :model do
 
       it "should change the status from draft to canceled" do
         product = Product.create(name: "test", net_price: 22.33)
-        line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-        order = Order.create(line_items: [line_item_1])
+        order = Order.create
+        line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
         status_transition = StatusTransition.create(order: order,
                                 event: "order canceled",
                                 to: "canceled")
@@ -69,8 +69,8 @@ RSpec.describe StatusTransition, :type => :model do
 
       it "should not allow the cancelation of an order if no reason is given" do
         product = Product.create(name: "test", net_price: 22.33)
-        line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-        order = Order.create(line_items: [line_item_1])
+        order = Order.create
+        line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
         status_transition = StatusTransition.create(order: order,
                                                     to: "canceled")
 
@@ -83,8 +83,8 @@ RSpec.describe StatusTransition, :type => :model do
     context "status transition is invalid" do
       it "should not change the status from draft to paid" do
         product = Product.create(name: "test", net_price: 22.33)
-        line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-        order = Order.create(line_items: [line_item_1])
+        order = Order.create
+        line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
         StatusTransition.create(order: order,
                                 event: "order paid",
                                 to: "paid")
@@ -95,8 +95,8 @@ RSpec.describe StatusTransition, :type => :model do
 
       it "should not change the status from placed to draft" do
         product = Product.create(name: "test", net_price: 22.33)
-        line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-        order = Order.create(line_items: [line_item_1])
+        order = Order.create
+        line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
         status_transition = StatusTransition.create(order: order,
                                 event: "order placed",
                                 to: "placed")
@@ -112,8 +112,8 @@ RSpec.describe StatusTransition, :type => :model do
 
       it "should not change the status from paid to canceled" do
         product = Product.create(name: "test", net_price: 22.33)
-        line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-        order = Order.create(line_items: [line_item_1])
+        order = Order.create
+        line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
         StatusTransition.create(order: order,
                                 event: "order placed",
                                 to: "placed")
@@ -132,8 +132,8 @@ RSpec.describe StatusTransition, :type => :model do
 
       it "should not change the status from canceled to draft" do
         product = Product.create(name: "test", net_price: 22.33)
-        line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-        order = Order.create(line_items: [line_item_1])
+        order = Order.create
+        line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
         StatusTransition.create(order: order,
                                 event: "order placed",
                                 to: "placed")
@@ -152,8 +152,8 @@ RSpec.describe StatusTransition, :type => :model do
 
       it "should not change the status from paid to draft" do
         product = Product.create(name: "test", net_price: 22.33)
-        line_item_1 = LineItem.create(product_id: product.id, quantity: 3)
-        order = Order.create(line_items: [line_item_1])
+        order = Order.create
+        line_item_1 = LineItem.create(product_id: product.id, quantity: 3, order: order)
         StatusTransition.create(order: order,
                                 event: "order placed",
                                 to: "placed")

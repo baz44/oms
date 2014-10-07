@@ -19,6 +19,6 @@ class Order < ActiveRecord::Base
   end
 
   def status_should_be_draft
-    errors.add(:base, "Cannot delete a product that has been added to orders.") if self.status != 'draft'
+    errors.add(:base, "Cannot update an order if order status is not draft") if self.status != 'draft'
   end
 end
