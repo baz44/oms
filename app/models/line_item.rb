@@ -16,7 +16,6 @@ class LineItem < ActiveRecord::Base
   end
 
   def status_should_be_draft
-      puts self.order.inspect
     errors.add(:base, "Cannot update an order if order status is not draft") if self.order.status != 'draft'
   end
 end
