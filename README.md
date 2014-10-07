@@ -6,3 +6,6 @@ OMS
 
 ### Test
 ./bin/test
+
+### Server
+./bin/server
